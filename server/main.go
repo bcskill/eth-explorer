@@ -66,7 +66,7 @@ func main() {
 	}()
 
 	var mongoUrl string
-	var dbName string
+	var dbName, userName, password string
 	var signersFile string
 
 	app := cli.NewApp()
@@ -93,6 +93,20 @@ func main() {
 			Usage:       "mongo database name",
 			EnvVar:      "MONGO_DBNAME",
 			Destination: &dbName,
+		},
+		cli.StringFlag{
+			Name:        "mongo-username, n",
+			Value:       "username",
+			Usage:       "mongo user name",
+			EnvVar:      "MONGO_USERNAME",
+			Destination: &userName,
+		},
+		cli.StringFlag{
+			Name:        "mongo-password, p",
+			Value:       "password",
+			Usage:       "mongo password",
+			EnvVar:      "MONGO_PASSWORD",
+			Destination: &password,
 		},
 		cli.StringFlag{
 			Name:        "signers-file, signers",
@@ -175,7 +189,7 @@ func main() {
 			panic(err)
 		}
 
-		backendInstance, err = backend.NewBackend(ctx, mongoUrl, rpcUrl, dbName, lockedAccounts, signers, logger, cache)
+		backendInstance, err = backend.NewBackend(ctx, mongoUrl, rpcUrl, dbName, userName, password, lockedAccounts, signers, logger, cache)
 		if err != nil {
 			return fmt.Errorf("failed to create backend: %v", err)
 		}

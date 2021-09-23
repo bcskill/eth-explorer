@@ -33,7 +33,7 @@ const (
 )
 
 func main() {
-	var netName, rpcUrl, mongoUrl, dbName string
+	var netName, rpcUrl, mongoUrl, dbName, userName, password string
 	var testnet bool
 
 	ctx, cancelFn := context.WithCancel(context.Background())
@@ -76,6 +76,20 @@ func main() {
 			EnvVar:      "MONGO_DBNAME",
 			Destination: &dbName,
 		},
+		cli.StringFlag{
+			Name:        "mongo-username, n",
+			Value:       "username",
+			Usage:       "mongo user name",
+			EnvVar:      "MONGO_USERNAME",
+			Destination: &userName,
+		},
+		cli.StringFlag{
+			Name:        "mongo-password, p",
+			Value:       "password",
+			Usage:       "mongo password",
+			EnvVar:      "MONGO_PASSWORD",
+			Destination: &password,
+		},
 	}
 	var backendInstance *backend.Backend
 	app.Before = func(*cli.Context) error {
@@ -92,7 +106,7 @@ func main() {
 			}
 		}()
 		network := getNetwork(netName, rpcUrl, testnet)
-		backendInstance, err = backend.NewBackend(ctx, mongoUrl, network.URL, dbName, nil, nil, logger, nil)
+		backendInstance, err = backend.NewBackend(ctx, mongoUrl, network.URL, dbName, userName, password,nil, nil, logger, nil)
 		if err != nil {
 			fatalExit(err)
 		}

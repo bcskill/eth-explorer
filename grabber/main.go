@@ -41,7 +41,7 @@ func main() {
 	var rpcUrl string
 	var checkExternal bool
 	var mongoUrl string
-	var dbName string
+	var dbName, userName, password string
 	var startFrom int64
 	var blockRangeLimit uint64
 	var workersCount uint
@@ -72,6 +72,20 @@ func main() {
 			Value:       "blocks",
 			Usage:       "mongo database name",
 			Destination: &dbName,
+		},
+		cli.StringFlag{
+			Name:        "mongo-username, n",
+			Value:       "username",
+			Usage:       "mongo user name",
+			EnvVar:      "MONGO_USERNAME",
+			Destination: &userName,
+		},
+		cli.StringFlag{
+			Name:        "mongo-password, p",
+			Value:       "password",
+			Usage:       "mongo password",
+			EnvVar:      "MONGO_PASSWORD",
+			Destination: &password,
 		},
 		cli.Int64Flag{
 			Name:        "start-from, s",
@@ -127,7 +141,7 @@ func main() {
 			// Ensure canonical form, since queries are case-sensitive.
 			lockedAccounts[i] = common.HexToAddress(l).Hex()
 		}
-		b, err := backend.NewBackend(ctx, mongoUrl, rpcUrl, dbName, lockedAccounts, nil, logger, nil)
+		b, err := backend.NewBackend(ctx, mongoUrl, rpcUrl, dbName, userName, password, lockedAccounts, nil, logger, nil)
 		if err != nil {
 			return fmt.Errorf("failed to create backend: %v", err)
 		}

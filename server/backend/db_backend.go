@@ -37,9 +37,11 @@ type MongoBackend struct {
 }
 
 // New create new rpc client with given url
-func NewMongoClient(rpcClient *rpc.Client, goClient *goclient.Client, host, dbName string, lgr *zap.Logger) (*MongoBackend, error) {
+func NewMongoClient(rpcClient *rpc.Client, goClient *goclient.Client, host, dbName, userName, password string, lgr *zap.Logger) (*MongoBackend, error) {
 	session, err := mgo.DialWithInfo(&mgo.DialInfo{
 		Addrs:   []string{host},
+		Username: userName,
+		Password: password,
 		Timeout: 240 * time.Second,
 	})
 	if err != nil {

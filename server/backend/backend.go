@@ -47,14 +47,14 @@ type Backend struct {
 	totalBurned     atomic.Value // *TotalBurned // Latest known. Eventually consistent.
 }
 
-func NewBackend(ctx context.Context, mongoUrl, rpcUrl, dbName string, lockedAccounts []string, signers map[common.Address]models.Signer,
+func NewBackend(ctx context.Context, mongoUrl, rpcUrl, dbName, userName, password string, lockedAccounts []string, signers map[common.Address]models.Signer,
 	lgr *zap.Logger, cache *ristretto.Cache) (*Backend, error) {
 	rpcClient, err := rpc.DialHTTPWithClient(rpcUrl, &http.Client{Timeout: rpcClientTimeout})
 	if err != nil {
 		return nil, fmt.Errorf("failed to dial rpc %q: %v", rpcUrl, err)
 	}
 	client := goclient.NewClient(rpcClient)
-	mongoBackend, err := NewMongoClient(rpcClient, client, mongoUrl, dbName, lgr)
+	mongoBackend, err := NewMongoClient(rpcClient, client, mongoUrl, dbName, userName, password, lgr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create mongo client: %v", err)
 	}
