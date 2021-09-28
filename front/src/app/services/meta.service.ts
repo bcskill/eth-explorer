@@ -2,7 +2,7 @@
 import {Injectable} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 
-const DEFAULT_TITLE = 'GoChain Explorer';
+const DEFAULT_TITLE = 'BCSChain Explorer';
 
 @Injectable({
   providedIn: 'root'
