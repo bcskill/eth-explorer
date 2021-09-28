@@ -142,14 +142,14 @@
                 </span>
               </div>
             </div>
-            <div class="data-list-row">
+            <!-- <div class="data-list-row">
               <div class="data-list-term">
                 Txs:
               </div>
               <div class="data-list-desc">
                 {{address.number_of_transactions}}
               </div>
-            </div>
+            </div> -->
             <div class="data-list-row">
               <div class="data-list-term">
                 Internal-txs:
@@ -166,14 +166,14 @@
                 {{address.number_of_token_holders}}
               </div>
             </div>
-            <div class="data-list-row">
+            <!-- <div class="data-list-row">
               <div class="data-list-term">
                 Token-txs:
               </div>
               <div class="data-list-desc">
                 {{address.number_of_token_transactions}}
               </div>
-            </div>
+            </div> -->
 			<div class="data-list-row">
               <div class="data-list-term">
                 Valid:
@@ -194,10 +194,10 @@
               <th class="text-shrink w-10">Contract</th>
               <th class="text-shrink w-10">Symbol</th>
               <th class="">Name</th>
-              <th class="text-shrink w-10">Txs</th>
+              <!-- <th class="text-shrink w-10">Txs</th> -->
               <th class="text-shrink text-nowrap w-10">Internal-txs</th>
               <th class="text-shrink w-10">Holders</th>
-              <th class="text-shrink text-nowrap w-10">Token-txs</th>
+              <!-- <th class="text-shrink text-nowrap w-10">Token-txs</th> -->
 			  <th class="text-shrink text-nowrap w-10">Valid</th>
             </tr>
             </thead>
@@ -206,7 +206,7 @@
               <td>{{index + 1}}</td>
               <td>
                 <a routerLink="/addr/{{address.address}}">
-                  {{address?.attached_contract?.contract_name}}
+                  Contract
                 </a>
               </td>
               <td>{{address.token_symbol}}</td>
@@ -221,10 +221,10 @@
                   </span>
                 </div>
               </td>
-              <td>{{address.number_of_transactions}}</td>
+              <!-- <td>{{address.number_of_transactions}}</td> -->
               <td>{{address.number_of_internal_transactions}}</td>
               <td>{{address.number_of_token_holders}}</td>
-              <td>{{address.number_of_token_transactions}}</td>
+              <!-- <td>{{address.number_of_token_transactions}}</td> -->
 			  <td>{{address.attached_contract.valid}}</td>
             </tr>
             </tbody>
