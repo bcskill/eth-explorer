@@ -100,7 +100,7 @@ export function convertWithDecimals(
   showUnit: boolean = true,
   removeTrailingZeros: boolean = false,
   decimals: number = 18,
-  unitName: string = 'GO',
+  unitName: string = 'BCS',
 ): string {
   if (!val) {
     return;

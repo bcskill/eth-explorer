@@ -41,7 +41,7 @@
         </div>
         <div class="data-list-row">
           <div class="data-list-term">
-            Value (GO):
+            Value (BCS):
           </div>
           <div class="data-list-desc">
             {{tx.from === tx.to ? '+/-' : addr.address === tx.to ? '+' : '-'}} {{tx.value | weiToGO: false : false | bigNumber}}
@@ -59,7 +59,7 @@
         <th class="w-20">Processed at</th>
         <th class="text-shrink"></th>
         <th class="w-20">Associate</th>
-        <th class="text-nowrap text-center">Value (GO)</th>
+        <th class="text-nowrap text-center">Value (BCS)</th>
       </tr>
       </thead>
       <tbody>
