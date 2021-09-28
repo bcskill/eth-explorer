@@ -28,7 +28,7 @@
             <app-addr-transactions *ngIf="addr" [addr]="addr"></app-addr-transactions>
           </tab-content>
         </tab>
-        <tab name="send_go" title="Send GO">
+        <tab name="send_go" title="Send BCS">
           <tab-content [hidden]="walletService.isProcessing">
             <app-sender></app-sender>
           </tab-content>
