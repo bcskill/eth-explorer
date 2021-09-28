@@ -20,7 +20,6 @@ import (
 	"github.com/dgraph-io/ristretto"
 	"github.com/gochain/gochain/v3/common"
 	"github.com/gochain/gochain/v3/consensus/clique"
-	"github.com/gochain/gochain/v3/core"
 	"github.com/gochain/gochain/v3/core/types"
 	"github.com/gochain/gochain/v3/goclient"
 	"github.com/gochain/gochain/v3/params"
@@ -145,12 +144,17 @@ func (b *Backend) TotalSupply(ctx context.Context) (*big.Int, *big.Int, error) {
 	}
 	if alloc == nil {
 		if err := utils.Retry(ctx, 5, 2*time.Second, func() (err error) {
-			var result *core.GenesisAlloc
+			/*var result *core.GenesisAlloc
 			err = b.goRPC.CallContext(ctx, &result, "eth_genesisAlloc")
 			if err != nil {
 				return err
 			}
 			alloc = result.Total()
+			*/
+			alloc, bResult := new(big.Int).SetString("1000000000000000000000000000", 0)
+			if !bResult {
+				return nil
+			}
 			b.alloc.Store(alloc)
 			return nil
 		}); err != nil {
