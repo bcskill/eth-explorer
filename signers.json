@@ -1,12 +1,17 @@
 {  
-    "0xdd7e460302a911f9162a208370cdcdc37b892453":{
-       "name":"Sample company",
-       "url":"https://sample.url/",
+    "0x48f155527f25eb1d4cb2aa32b7e84692aa0025c0":{
+       "name":"First node",
+       "url":"https://nb1.com",
        "region":"North America"
     },
-    "0x7aeceb5d345a01f8014a4320ab1f3d467c0c086a":{  
-             "name":"Another company",
-       "url":"http://another.url/",
+    "0x5bf38521b456a51c8c56a43e4111739365d11af0":{  
+       "name":"Second node",
+       "url":"https://nb2.com",
+       "region":"Russia"
+    },
+    "0x0943715ce6a08f7c17f1d0367cae39c2f79d273f":{  
+       "name":"Third node",
+       "url":"https://nb3.com",
        "region":"Asia"
     }
 }
