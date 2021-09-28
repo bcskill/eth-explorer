@@ -127,9 +127,9 @@ func (mb *MongoBackend) createIndexes() error {
 		{c: "Blocks", index: mgo.Index{Key: []string{"total_fees_burned", "-created_at"}, Background: true, Sparse: true}},
 		{c: "ActiveAddress", index: mgo.Index{Key: []string{"updated_at"}, Background: true, Sparse: true}},
 		{c: "ActiveAddress", index: mgo.Index{Key: []string{"address"}, Unique: true, DropDups: true, Background: true, Sparse: true}},
-		{c: "Address", index: mgo.Index{Key: []string{"address"}, Unique: true, DropDups: true, Background: true, Sparse: true}},
-		{c: "Address", index: mgo.Index{Key: []string{"contract"}, Background: true}},
-		{c: "Address", index: mgo.Index{Key: []string{"-balance_float", "address"}, Background: true, Sparse: true}},
+		{c: "Addresses", index: mgo.Index{Key: []string{"address"}, Unique: true, DropDups: true, Background: true, Sparse: true}},
+		{c: "Addresses", index: mgo.Index{Key: []string{"contract"}, Background: true}},
+		{c: "Addresses", index: mgo.Index{Key: []string{"-balance_float", "address"}, Background: true, Sparse: true}},
 		{c: "TokenHolders", index: mgo.Index{Key: []string{"contract_address", "token_holder_address"}, Background: true, Sparse: true}},
 		{c: "TokenHolders", index: mgo.Index{Key: []string{"token_holder_address"}, Background: true, Sparse: true}},
 		{c: "TokenHolders", index: mgo.Index{Key: []string{"balance_int"}, Background: true, Sparse: true}},
@@ -756,8 +756,12 @@ func (mb *MongoBackend) getTokenHoldersList(contractAddress string, filter *mode
 }
 func (mb *MongoBackend) getOwnedTokensList(ownerAddress string, filter *models.PaginationFilter) ([]*models.TokenHolder, error) {
 	var tokenHoldersList []*models.TokenHolder
+	query := bson.M{"token_holder_address": ownerAddress}
+	if filter.ContractAddress != "" {
+	    query = bson.M{"token_holder_address": ownerAddress, "contract_address": filter.ContractAddress}
+        }
 	err := mb.mongo.C("TokenHolders").
-		Find(bson.M{"token_holder_address": ownerAddress}).
+		Find(query).
 		Sort("-balance_int").
 		Skip(filter.Skip).
 		Limit(filter.Limit).
@@ -870,7 +874,7 @@ func (mb *MongoBackend) getContracts(filter *models.ContractsFilter) ([]*models.
 			"foreignField": "address",
 			"as":           "attached_contract",
 		}},
-		{"$match": contractQuery},
+		//{"$match": contractQuery},
 		{"$unwind": bson.M{
 			"path": "$attached_contract",
 		}},

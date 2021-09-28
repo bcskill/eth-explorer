@@ -12,6 +12,7 @@ const (
 type PaginationFilter struct {
 	Skip  int `schema:"skip,omitempty"`
 	Limit int `schema:"limit,omitempty"`
+	ContractAddress   string `schema:"contract_address,omitempty"`
 }
 
 func (f *PaginationFilter) Sanitize() {
