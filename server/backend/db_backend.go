@@ -42,7 +42,7 @@ func NewMongoClient(rpcClient *rpc.Client, goClient *goclient.Client, host, dbNa
 		Addrs:   []string{host},
 		Username: userName,
 		Password: password,
-		Timeout: 240 * time.Second,
+		Timeout: 40 * time.Second,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("failed to dial mongo: %v", err)
@@ -384,7 +384,7 @@ func (mb *MongoBackend) importAddress(address string, balance *big.Int, token *t
 	balanceGoString := new(big.Rat).SetFrac(balance, wei).FloatString(18)
 	lgr := mb.Lgr.With(zap.String("address", address))
 	lgr.Debug("Updating address", zap.String("balance", balanceGoString), zap.Float64("balanceFloat", balanceGoFloat))
-	tokenHoldersCounter, err := mb.mongo.C("TokensHolders").Find(bson.M{"contract_address": address}).Count()
+	tokenHoldersCounter, err := mb.mongo.C("TokenHolders").Find(bson.M{"contract_address": address}).Count()
 	if err != nil {
 		return nil, fmt.Errorf("failed to count token holders: %v", err)
 	}
@@ -434,7 +434,7 @@ func (mb *MongoBackend) importTokenHolder(contractAddress, tokenHolderAddress st
 		Balance:            token.Balance.String(),
 		UpdatedAt:          time.Now(),
 		BalanceInt:         balanceInt.Int64()}
-	_, err := mb.mongo.C("TokensHolders").Upsert(bson.M{"contract_address": contractAddress, "token_holder_address": tokenHolderAddress}, tokenHolder)
+	_, err := mb.mongo.C("TokenHolders").Upsert(bson.M{"contract_address": contractAddress, "token_holder_address": tokenHolderAddress}, tokenHolder)
 	if err != nil {
 		return nil, fmt.Errorf("failed to upsert token holders: %v", err)
 	}
@@ -476,7 +476,7 @@ func (mb *MongoBackend) deleteContract(contractAddress string) error {
 		return fmt.Errorf("failed to remove internal transactions: %v", err)
 	}
 	// deleting all token holders
-	_, err = mb.mongo.C("TokensHolders").RemoveAll(bson.M{"contract_address": contractAddress})
+	_, err = mb.mongo.C("TokenHolders").RemoveAll(bson.M{"contract_address": contractAddress})
 	if err != nil {
 		return fmt.Errorf("failed to remove token holders: %v", err)
 	}
@@ -743,7 +743,7 @@ func (mb *MongoBackend) getTransactionList(address string, filter *models.TxsFil
 
 func (mb *MongoBackend) getTokenHoldersList(contractAddress string, filter *models.PaginationFilter) ([]*models.TokenHolder, error) {
 	var tokenHoldersList []*models.TokenHolder
-	err := mb.mongo.C("TokensHolders").
+	err := mb.mongo.C("TokenHolders").
 		Find(bson.M{"contract_address": contractAddress}).
 		Sort("-balance_int").
 		Skip(filter.Skip).
@@ -756,7 +756,7 @@ func (mb *MongoBackend) getTokenHoldersList(contractAddress string, filter *mode
 }
 func (mb *MongoBackend) getOwnedTokensList(ownerAddress string, filter *models.PaginationFilter) ([]*models.TokenHolder, error) {
 	var tokenHoldersList []*models.TokenHolder
-	err := mb.mongo.C("TokensHolders").
+	err := mb.mongo.C("TokenHolders").
 		Find(bson.M{"token_holder_address": ownerAddress}).
 		Sort("-balance_int").
 		Skip(filter.Skip).
