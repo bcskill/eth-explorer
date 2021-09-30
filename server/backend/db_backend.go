@@ -561,7 +561,7 @@ func (mb *MongoBackend) getLatestsBlocks(filter *models.PaginationFilter) ([]*mo
 	err := mb.mongo.C("Blocks").
 		Find(nil).
 		Sort("-number").
-		Select(bson.M{"number": 1, "created_at": 1, "miner": 1, "tx_count": 1, "extra_data": 1}).
+		Select(bson.M{"number": 1, "created_at": 1, "miner": 1, "tx_count": 1, "extra_data": 1, "gas_fees": 1}).
 		Skip(filter.Skip).
 		Limit(filter.Limit).
 		All(&blocks)

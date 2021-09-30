@@ -616,6 +616,20 @@ func fillExtra(block *models.Block) *models.Block {
 func fillExtraLight(block *models.LightBlock) *models.LightBlock {
 	extra := []byte(block.ExtraData)
 	block.Extra.Vanity = strings.TrimRight(string(clique.ExtraVanity(extra)), "\u0000")
+	gasFees, bResult := new(big.Int).SetString(block.GasFees, 0)
+	if bResult {
+		y := big.NewInt(0)
+		if gasFees.Cmp(y) == 1 {
+			total := new(big.Rat).SetFrac(gasFees, wei) // return in GO instead of wei
+			block.GasFees = total.FloatString(18)
+		} else {
+			block.GasFees = "0"
+		}
+
+	} else {
+		block.GasFees = "null"
+	}
+
 	return block
 }
 func (b *Backend) DeleteBlockByHash(hash string) error {

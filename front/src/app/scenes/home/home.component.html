@@ -134,12 +134,12 @@
                   {{block.tx_count}}
                 </div>
               </div>
-              <div class="data-list-row" *ngIf="block.extra_data">
+              <div class="data-list-row" *ngIf="block.gas_fees">
                 <div class="data-list-term">
-                  Extra Data
+                  Gas fees
                 </div>
                 <div class="data-list-desc">
-                  {{block.extra.vanity}}
+                  {{block.gas_fees}}
                 </div>
               </div>
             </div>
@@ -152,7 +152,7 @@
                 <th class="w-10">Block</th>
                 <th class="w-10">TXs</th>
                 <th class="w-40">Signer</th>
-                <th class="w-15">Extra data</th>
+                <th class="w-15">Gas fees</th>
                 <th class="w-25">Created</th>
               </tr>
             </thead>
@@ -162,7 +162,7 @@
                 <td>{{block.tx_count}}</td>
                 <td class="text-monospace text-truncate"><a class="ws-p"
                     routerLink="/addr/{{block.miner}}">{{block.miner}}</a></td>
-                <td class="text-truncate">{{block.extra.vanity}}</td>
+                <td class="text-truncate">{{block.gas_fees}}</td>
                 <td class="text-truncate">{{block.created_at | date: 'yyyy/MM/dd HH:mm:ss'}}
                   ({{block.created_at | timeAgo}})
                 </td>

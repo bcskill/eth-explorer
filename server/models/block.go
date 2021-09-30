@@ -34,6 +34,7 @@ type LightBlock struct {
 	TxCount   int             `json:"tx_count" bson:"tx_count"`
 	ExtraData string          `json:"-" bson:"extra_data"`
 	Extra     ExtraDataStruct `json:"extra" bson:"-"`
+	GasFees   string          `json:"gas_fees" bson:"gas_fees"`
 }
 
 type LightBlockList struct {
