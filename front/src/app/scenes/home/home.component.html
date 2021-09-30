@@ -120,14 +120,6 @@
               </div>
               <div class="data-list-row">
                 <div class="data-list-term">
-                  Created
-                </div>
-                <div class="data-list-desc">
-                  {{block.created_at | date: 'yyyy/MM/dd HH:mm:ss'}} ({{block.created_at | timeAgo}})
-                </div>
-              </div>
-              <div class="data-list-row">
-                <div class="data-list-term">
                   Transactions
                 </div>
                 <div class="data-list-desc">
@@ -140,6 +132,14 @@
                 </div>
                 <div class="data-list-desc">
                   {{block.gas_fees}}
+                </div>
+              </div>
+			  <div class="data-list-row">
+                <div class="data-list-term">
+                  Created
+                </div>
+                <div class="data-list-desc">
+                  {{block.created_at | date: 'yyyy/MM/dd HH:mm:ss'}} ({{block.created_at | timeAgo}})
                 </div>
               </div>
             </div>
