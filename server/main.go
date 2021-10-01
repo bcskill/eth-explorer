@@ -22,7 +22,7 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/gochain-io/explorer/server/backend"
 	"github.com/gochain-io/explorer/server/models"
-	"github.com/gochain/gochain/v3/common"
+	"github.com/bcskill/bcschain/v3/common"
 	"github.com/gorilla/schema"
 	qrcode "github.com/skip2/go-qrcode"
 	"github.com/urfave/cli"

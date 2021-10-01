@@ -14,10 +14,10 @@ import (
 
 	"github.com/gochain-io/explorer/server/models"
 	"github.com/gochain-io/explorer/server/tokens"
-	"github.com/gochain/gochain/v3/common"
-	"github.com/gochain/gochain/v3/core/types"
-	"github.com/gochain/gochain/v3/goclient"
-	"github.com/gochain/gochain/v3/rpc"
+	"github.com/bcskill/bcschain/v3/common"
+	"github.com/bcskill/bcschain/v3/core/types"
+	"github.com/bcskill/bcschain/v3/goclient"
+	"github.com/bcskill/bcschain/v3/rpc"
 	"go.uber.org/zap"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -502,7 +502,7 @@ func (mb *MongoBackend) getBlockByNumber(blockNumber int64) (*models.Block, erro
 
 func (mb *MongoBackend) getBlockByHash(blockHash string) (*models.Block, error) {
 	var c models.Block
-	err := mb.mongo.C("Blocks").Find(bson.M{"hash": blockHash}).Select(bson.M{"transactions": 0}).One(&c)
+	err := mb.mongo.C("Blocks").Find(bson.M{"hash": blockHash}).One(&c)
 	if err != nil {
 		if err == mgo.ErrNotFound {
 			return nil, nil

@@ -14,7 +14,7 @@ import (
 	"github.com/gochain-io/explorer/server/backend"
 	"github.com/gochain-io/explorer/server/models"
 	"github.com/gochain-io/explorer/server/tokens"
-	"github.com/gochain/gochain/v3/common"
+	"github.com/bcskill/bcschain/v3/common"
 	"github.com/gochain/web3"
 	"github.com/urfave/cli"
 	"go.uber.org/zap"

@@ -8,7 +8,7 @@ require (
 	github.com/dgraph-io/ristretto v0.0.2
 	github.com/go-chi/chi v4.0.2+incompatible
 	github.com/go-chi/cors v1.0.0
-	github.com/gochain/gochain/v3 v3.4.7
+	github.com/bcskill/bcschain/v3 v3.4.9-beta
 	github.com/gochain/web3 v0.2.65
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
 	github.com/golang/snappy v0.0.4 // indirect

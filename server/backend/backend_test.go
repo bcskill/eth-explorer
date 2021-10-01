@@ -11,9 +11,9 @@ import (
 	"github.com/gochain-io/explorer/server/models"
 	"github.com/gochain-io/explorer/server/tokens"
 
-	"github.com/gochain/gochain/v3/common"
-	"github.com/gochain/gochain/v3/core/types"
-	"github.com/gochain/gochain/v3/rlp"
+	"github.com/bcskill/bcschain/v3/common"
+	"github.com/bcskill/bcschain/v3/core/types"
+	"github.com/bcskill/bcschain/v3/rlp"
 	"go.uber.org/zap/zaptest"
 )
 

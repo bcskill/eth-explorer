@@ -11,19 +11,19 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/gochain/gochain/v3"
+	"github.com/bcskill/bcschain/v3"
 
 	"github.com/gochain-io/explorer/server/models"
 	"github.com/gochain-io/explorer/server/tokens"
 	"github.com/gochain-io/explorer/server/utils"
 
 	"github.com/dgraph-io/ristretto"
-	"github.com/gochain/gochain/v3/common"
-	"github.com/gochain/gochain/v3/consensus/clique"
-	"github.com/gochain/gochain/v3/core/types"
-	"github.com/gochain/gochain/v3/goclient"
-	"github.com/gochain/gochain/v3/params"
-	"github.com/gochain/gochain/v3/rpc"
+	"github.com/bcskill/bcschain/v3/common"
+	"github.com/bcskill/bcschain/v3/consensus/clique"
+	"github.com/bcskill/bcschain/v3/core/types"
+	"github.com/bcskill/bcschain/v3/goclient"
+	"github.com/bcskill/bcschain/v3/params"
+	"github.com/bcskill/bcschain/v3/rpc"
 	"go.uber.org/zap"
 )
 
